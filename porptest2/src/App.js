@@ -1,24 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Subject from './Subject';
 
 function App() {
+  const subjects = [{key:'js', text:'javascript'},
+                    {key:'java', text:'JAVA'},
+                    {key:'jq', text:'JQuery'},
+                    {key:'hs', text:'HTML/CSS'}  ,
+                    {key:'spring', text:'Spring Framework'}];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <select name="subject">
+      <Subject subjects = {subjects}/>
+    </select>
   );
 }
 
