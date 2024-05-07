@@ -1,23 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import { MakeAccount } from './MakeAccount';
+import AccountInfo from './AccountInfo';
+import Deposit from './Deposit';
+import Withdraw from './Withdraw';
+import AllAccountInfo from './AllAccountInfo';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* <MakeAccount/> */}
+    {/* <AccountInfo/> */}
+    {/* <Deposit/> */}
+      {/* <Withdraw/> */}
+      <AllAccountInfo/>
     </div>
   );
 }
