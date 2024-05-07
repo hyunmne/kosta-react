@@ -14,11 +14,14 @@ import React, {Component} from 'react';
 //     }
 // }
 
-function PropTest(props) { // props : 내장 객체 
+
+// props = {name:'hong', age:30}
+// let {name, age} = props
+function PropTest({name, age}) { // props : 내장 객체 / 밖에 있는 태그가 안에 있는 태그에 데이터를 전달할 때 사용하는 매개체 
     return (
         <div>
-            <h1>{props.name}</h1>
-            <h1>{props.age}</h1>
+            <h1>{name}</h1>
+            <h1>{age}</h1>
         </div>
     )
 }
