@@ -1,16 +1,22 @@
 import {useState} from 'react'; 
 import './App.css';
+import axios from 'axios';
 
 export default function AccountInfo() {
 
     const [accId, setAccId] = useState('');
-    const [acc, setAcc] = useState({id:'',name:'',money:'',type:'',grade:''})
+    const [acc, setAcc] = useState({id:'',name:'',balance:'',type:'',grade:''})
 
     const submit = (e) => {
         e.preventDefault();
+        axios.get(`http://localhost:8090/accountInfo?id=${accId}`)
+            .then(res=>{
+                console.log(res)
+                setAcc({...res.data})
+            })
         // 서버로부터 accId로 조회해 온 결과를 화면에 출력한다.
-        let racc = {id:accId, name:'홍길동',money:'100000',type:'special',grade:'VIP'}
-        setAcc({...racc})
+        // let racc = {id:accId, name:'홍길동',money:'100000',type:'special',grade:'VIP'}
+        // setAcc({...racc})
     }
 
     return (
@@ -39,7 +45,7 @@ export default function AccountInfo() {
                     </tr>
                     <tr>
                         <th>잔액</th>
-                        <td className="accValue"><label>{acc.money}</label></td>
+                        <td className="accValue"><label>{acc.balance}</label></td>
                     </tr>
                     <tr>
                         <th>종류</th>

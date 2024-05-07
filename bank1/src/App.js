@@ -10,11 +10,11 @@ import AllAccountInfo from './AllAccountInfo';
 function App() {
   return (
     <div>
-      {/* <MakeAccount/> */}
+      <MakeAccount/>
     {/* <AccountInfo/> */}
     {/* <Deposit/> */}
       {/* <Withdraw/> */}
-      <AllAccountInfo/>
+      {/* <AllAccountInfo/> */}
     </div>
   );
 }

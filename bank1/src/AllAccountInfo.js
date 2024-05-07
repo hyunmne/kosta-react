@@ -1,4 +1,6 @@
 import {useState, useEffect} from 'react';
+import './App.css';
+import axios from 'axios';
 
 export default function AllAccountInfo() {
     
@@ -6,6 +8,11 @@ export default function AllAccountInfo() {
     
     // 실행하자마자 실행 .. ? 
     useEffect(()=>{
+        axios.get(`http://localhost:8090/allAccountInfo`)
+            .then(res=>{
+                console.log(res)
+                setAccs({...res.data})
+            })
        let raccs = [{id:'1001',name:'홍길동',balance:100000,type:'normal',grade:''},
                     {id:'1002',name:'김길동',balance:200000,type:'special',grade:'VIP'},
                     {id:'1003',name:'고길동',balance:300000,type:'special',grade:'Sliver'},
