@@ -19,6 +19,8 @@ const Header = () => {
                 <li className="nav-item"><Link to="/withdraw">출금</Link></li>
                 <li className="nav-item"><Link to="/accountInfo">계좌조회</Link></li>
                 <li className="nav-item"><Link to="/allAccountInfo">전체계좌조회</Link></li>
+                <li className="nav-item"><Link to="/join">회원가입</Link></li>
+                <li className="nav-item"><Link to="/login">로그인</Link></li>
             </ul>
         </div>
     )
