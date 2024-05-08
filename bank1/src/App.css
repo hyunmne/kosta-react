@@ -22,3 +22,16 @@
   margin: 0 10px;
   line-height:80px
 }
+
+.route{
+  margin-top:100px;
+  text-align:center;
+}
+
+table {
+  margin : 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
