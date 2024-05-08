@@ -4,22 +4,20 @@ import axios from 'axios';
 
 export default function AllAccountInfo() {
     
-    const [accs, setAccs] = useState([])
+    const [accs, setAccs] = useState([]);
     
     // 실행하자마자 실행 .. ? 
     useEffect(()=>{
-        axios.get(`http://localhost:8090/allAccountInfo`)
+        axios.get('http://localhost:8090/allAccountInfo')
             .then(res=>{
-                console.log(res)
                 setAccs({...res.data})
             })
-       let raccs = [{id:'1001',name:'홍길동',balance:100000,type:'normal',grade:''},
-                    {id:'1002',name:'김길동',balance:200000,type:'special',grade:'VIP'},
-                    {id:'1003',name:'고길동',balance:300000,type:'special',grade:'Sliver'},
-                    {id:'1004',name:'하길동',balance:400000,type:'special',grade:'Gold'},
-                    {id:'1005',name:'장길동',balance:500000,type:'normal',grade:''}
-       ]
-       setAccs([...raccs])
+    //    let raccs = [{id:'1001',name:'홍길동',balance:100000,type:'normal',grade:''},
+    //                 {id:'1002',name:'김길동',balance:200000,type:'special',grade:'VIP'},
+    //                 {id:'1003',name:'고길동',balance:300000,type:'special',grade:'Sliver'},
+    //                 {id:'1004',name:'하길동',balance:400000,type:'special',grade:'Gold'},
+    //                 {id:'1005',name:'장길동',balance:500000,type:'normal',grade:''}
+    //    ]
     }, [])
 
     return (

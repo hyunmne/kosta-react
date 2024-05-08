@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import './App.css';
+import axios from 'axios';
 
 export default function Deposit() {
 
@@ -6,9 +8,16 @@ export default function Deposit() {
     const [message, setMessage] = useState('');
     const submit = (e) => {
         e.preventDefault();
-        // backend를에 acc를 전송한 후 잔액을 받는다.
-        setMessage(`입금 성공 (잔액 : ${100000+ +acc.money})`); // + + 를 해야 숫자로 인식해 더해줌,... .... 
+        axios.post(`http://localhost:8090/deposit`, acc)
+            .then(res=>{
+                setMessage(`입금 성공 (잔액 : ${res.data})`); // + + 를 해야 숫자로 인식해 더해줌,... .... 
+            })
+            .catch(err=>{
+                setMessage(`입금 실패 : ${err.response.data}`);
+            })
+
     }
+
 
     return (
         <>
