@@ -11,7 +11,7 @@ const CollapseEx = () => {
         <div>
             <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Toggle</Button>
             <Collapse isOpen={collapse}>
-                <Card>
+                <Card style={{width:'300px'}}>
                     <CardBody>
                         Anim pariatur cliche reprehenderit,
                         enim eiusmod high life accusamus terry richardson ad squid. Nihil
