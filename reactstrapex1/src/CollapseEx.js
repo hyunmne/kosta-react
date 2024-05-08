@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { Collapse,Button,CardBody,Card } from 'reactstrap';
+import { Collapse, UncontrolledCollapse, Button,CardBody,Card } from 'reactstrap';
 
 const CollapseEx = () => {
     const [collapse, setCollapse] = useState(false);
@@ -11,7 +11,7 @@ const CollapseEx = () => {
         <div>
             <Button color="primary" onClick={toggle} style={{ marginBottom: '1rem' }}>Toggle</Button>
             <Collapse isOpen={collapse}>
-                <Card style={{width:'300px'}}>
+                <Card>
                     <CardBody>
                         Anim pariatur cliche reprehenderit,
                         enim eiusmod high life accusamus terry richardson ad squid. Nihil
@@ -20,6 +20,18 @@ const CollapseEx = () => {
                     </CardBody>
                 </Card>
             </Collapse>
+
+            <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>Toggle</Button>
+            <UncontrolledCollapse toggler='#toggler'>
+                <Card>
+                    <CardBody>
+                        Anim pariatur cliche reprehenderit,
+                        enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                        anim keffiyeh helvetica, craft beer labore wes anderson cred
+                        nesciunt sapiente ea proident.
+                    </CardBody>
+                </Card>
+            </UncontrolledCollapse>
         </div>
     )
 }
