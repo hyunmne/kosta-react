@@ -10,7 +10,7 @@ export default function AllAccountInfo() {
     useEffect(()=>{
         axios.get('http://localhost:8090/allAccountInfo')
             .then(res=>{
-                setAccs({...res.data})
+                setAccs([...res.data])
             })
     //    let raccs = [{id:'1001',name:'홍길동',balance:100000,type:'normal',grade:''},
     //                 {id:'1002',name:'김길동',balance:200000,type:'special',grade:'VIP'},
@@ -21,7 +21,7 @@ export default function AllAccountInfo() {
     }, [])
 
     return (
-        <>
+        <div className='route'>
             <h3>전체계좌조회</h3>
             <table border="1">
                 <tbody>
@@ -43,7 +43,7 @@ export default function AllAccountInfo() {
                     ))}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 
     // for 문? 반복문? > map으로... 

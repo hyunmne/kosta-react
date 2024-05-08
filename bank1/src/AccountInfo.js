@@ -20,7 +20,7 @@ export default function AccountInfo() {
     }
 
     return (
-        <div className="App">
+        <div className='route'>
             <h3>계좌 조회</h3>
             <table border="1">
                 <tbody>

@@ -6,18 +6,23 @@ import Deposit from './Deposit';
 import Withdraw from './Withdraw';
 import AllAccountInfo from './AllAccountInfo';
 import Header from './Header';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'; 
 
 
 
 function App() {
   return (
     <div>
-      {/* <MakeAccount/> */}
-      {/* <AccountInfo/> */}
-      {/* <Deposit/> */}
-      {/* <Withdraw/> */}
-      {/* <AllAccountInfo/> */}
+      <BrowserRouter>
       <Header/>
+      <Routes>
+        <Route exact path="/" element={<MakeAccount/>} />
+        <Route exact path="/accountInfo" element={<AccountInfo/>} />
+        <Route exact path="/deposit" element={<Deposit />} />
+        <Route exact path="/withdraw" element={<Withdraw />} />
+        <Route exact path="/allAccountInfo" element={<AllAccountInfo/>} />
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function Withdraw() {
     }
 
     return (
-        <>
+        <div className="route">
             <h3>출금</h3>
             <table border="1">
                 <tbody>
@@ -37,6 +37,6 @@ export default function Withdraw() {
                 </tbody>
             </table>
             <div>{message}</div>
-        </>
+        </div>
     )
 }

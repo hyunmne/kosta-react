@@ -17,7 +17,7 @@ export const MakeAccount = () => {
     }
 
     return (
-        <>
+        <div className="route">
             <h3>계좌 개설</h3>
             <table border="1" >
                 <tbody>
@@ -58,6 +58,6 @@ export const MakeAccount = () => {
                     </tr>
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }

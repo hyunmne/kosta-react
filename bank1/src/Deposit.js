@@ -20,7 +20,7 @@ export default function Deposit() {
 
 
     return (
-        <>
+        <div className="route">
             <h3>입금</h3>
             <table border="1">
                 <tbody>
@@ -39,6 +39,6 @@ export default function Deposit() {
                 </tbody>
             </table>
             <div>{message}</div>
-        </>
+        </div>
     )
 }
