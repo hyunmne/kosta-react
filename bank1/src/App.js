@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import Header from './Header';
 import { MakeAccount } from './MakeAccount';
 import AccountInfo from './AccountInfo';
