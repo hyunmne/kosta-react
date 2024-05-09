@@ -20,6 +20,17 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accService;
+	
+	@GetMapping("/checkAccId")
+	public ResponseEntity<String> checkAccId(@RequestParam("id") String id) {
+		try {
+			Boolean isId = accService.checkAccountDoubleId(id);
+			return new ResponseEntity<String>(String.valueOf(isId), HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@GetMapping("/accountInfo")
 	public ResponseEntity<AccountDto> accountInfo(@RequestParam("id") String id) {

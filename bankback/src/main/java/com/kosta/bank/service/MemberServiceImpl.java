@@ -39,7 +39,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Boolean doubleMemberCheckId(String id) throws Exception {
 		Optional<Member> omem = memres.findById(id);
-		return omem!=null;
+		if (omem.isEmpty()) return false;
+		return true;
 	}
 
 }
