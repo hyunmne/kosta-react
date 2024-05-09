@@ -65,7 +65,7 @@ const BoardList = () => {
                     <Button onClick={() => submit(1)}>검색</Button>
                 </Col>
                 <Col sm={3}>
-                    <Button tag="a" href="/writeform" color='success'>글쓰기</Button>
+                    <Button tag="a" href="/boardWrite" color='success'>글쓰기</Button>
                 </Col>
             </FormGroup>
             <Table bordered style={{ margin: "0 auto", width: "900px", textAlign: 'center' }}>

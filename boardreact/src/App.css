@@ -3,3 +3,18 @@
   text-align:center;
   font-size:25px;
 }
+
+form {
+  margin: 0 auto;
+  padding: 20px;
+  width: 600px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+button {
+  margin:10px;
+
+}
