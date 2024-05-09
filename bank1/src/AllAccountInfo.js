@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import './App.css';
 import axios from 'axios';
+import { Table } from 'reactstrap';
 
 export default function AllAccountInfo() {
     
@@ -22,8 +23,8 @@ export default function AllAccountInfo() {
 
     return (
         <div className='route'>
-            <h3>전체계좌조회</h3>
-            <table border="1">
+            <h4>전체계좌조회</h4>
+            <Table border="1" hover style={{width:'800px', margin: '0 auto'}}>
                 <tbody>
                     <tr>
                         <th>계좌번호</th>
@@ -42,7 +43,7 @@ export default function AllAccountInfo() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </Table>
         </div>
     )
 

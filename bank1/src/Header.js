@@ -24,7 +24,7 @@ const Header = () => {
             <NavbarToggler onClick={toggle}/>
             <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavLink href="/">로그인</NavLink>
+                    <NavLink href="/login">로그인</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink href="/join">회원가입</NavLink>
@@ -32,7 +32,7 @@ const Header = () => {
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle tag="a" className="nav-link" caret>계좌</DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem tag="a" href="/makeAccount">계좌개설</DropdownItem>
+                        <DropdownItem tag="a" href="/">계좌개설</DropdownItem>
                         <DropdownItem tag="a" href="/deposit">입금</DropdownItem>
                         <DropdownItem tag="a" href="/withdraw">출금</DropdownItem>
                         <DropdownItem tag="a" href="/accountInfo">계좌조회</DropdownItem>
