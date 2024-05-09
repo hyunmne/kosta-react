@@ -2,6 +2,7 @@ import {useState} from 'react';
 import './App.css';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -24,6 +25,9 @@ export default function Login() {
     return(
         <div className="route">
             <h3>로그인</h3>
+            <Form>
+
+            </Form>
             <table border="1">
                 <tbody>
                     <tr>
