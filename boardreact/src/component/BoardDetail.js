@@ -13,7 +13,8 @@ const BoardDetail = () => {
     let id = 'hong';
 
     useEffect(()=>{
-        axios.get(`${url}/boardDetail/${num}/${id}`)
+        let loginUser = JSON.parse(sessionStorage.getItem("user"));
+        axios.get(`${url}/boardDetail/${num}/${loginUser.id}`)
             .then(res=>{
                 console.log(res);
                 let resBoard = res.data.board;

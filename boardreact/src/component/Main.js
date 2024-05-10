@@ -1,14 +1,39 @@
-import {Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
+import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { useEffect, useState } from 'react';
 
 const Main = () => {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        let loginUser = JSON.parse(sessionStorage.getItem("user"));
+        // console.log(loginUser);
+        loginUser && setUser({ ...loginUser });
+    }, [])
+
+    const logout = () => {
+        sessionStorage.removeItem("user");
+        setUser(null);
+    }
+
     return (
-        <Navbar color="light" light expand="md">
+        <Navbar color="info" light expand="md">
             <NavbarBrand href="/" className='mr-auto'><i><b>kosta.com</b></i></NavbarBrand>
-            <NavbarToggler className='mr-auto'/>
+            <NavbarToggler className='mr-auto' />
             <Nav navbar>
-                <NavItem>
-                    <NavLink href="/login">로그인</NavLink>
-                </NavItem>
+                {user !== null ?
+                    (<>
+                        <NavItem>
+                            <NavLink href="/#"><b>{user.name}</b></NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink onClick={logout}>로그아웃</NavLink>
+                        </NavItem>
+                    </>
+                    ) :
+                    (<NavItem>
+                        <NavLink href="/login">로그인</NavLink>
+                    </NavItem>)
+                }
                 <NavItem>
                     <NavLink href="/join">회원가입</NavLink>
                 </NavItem>
@@ -17,7 +42,7 @@ const Main = () => {
                 </NavItem>
             </Nav>
         </Navbar>
-    ) 
+    )
 }
 
 export default Main;
