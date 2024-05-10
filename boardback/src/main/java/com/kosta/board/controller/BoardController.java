@@ -1,12 +1,20 @@
 package com.kosta.board.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +28,9 @@ import com.kosta.board.util.PageInfo;
 
 @RestController
 public class BoardController {
+
+	@Value("${upload.path}")
+	private String uploadPath;
 	
 	@Autowired
 	private BoardService brdService;
@@ -57,7 +68,7 @@ public class BoardController {
 	@PostMapping("/boardWrite")
 	public ResponseEntity<Integer> boardWrite(@RequestParam("subject") String subject,
 			@RequestParam("content") String content, @RequestParam("writer") String writer,
-			@RequestParam("file") MultipartFile[] files){
+			@RequestParam(name="file", required=false) MultipartFile[] files){
 		try {
 			Integer boardNum = brdService.boardWrite(subject, content, writer, files);
 			return new ResponseEntity<Integer>(boardNum, HttpStatus.OK);
@@ -81,4 +92,17 @@ public class BoardController {
 			return new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("/image/{num}")
+	public void image(@PathVariable String num, HttpServletResponse response) {
+		try {
+			FileInputStream fis = new FileInputStream(new File(uploadPath, num));
+			OutputStream out = response.getOutputStream();
+			FileCopyUtils.copy(fis, out);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

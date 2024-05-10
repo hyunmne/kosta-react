@@ -18,7 +18,7 @@ const BoardDetail = () => {
                 console.log(res);
                 let resBoard = res.data.board;
                 setBoard({...resBoard})
-                setHeart({...res.data.like})
+                setHeart(res.data.like)
 
                 let fileNums = resBoard.fileNums.split(",");
                 setImageList([...fileNums]);

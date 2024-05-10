@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Input, Button, Label, Col, Form, FormGroup } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {url} from '../config';
 
 const BoardWrite = () => {
     const [board, setBoard] = useState({ subject: '', content: '', writer: '' });
     const [fileList, setFileList] = useState([]);
+    const navigate = useNavigate();
 
     const fileChange = (e) => {
         if (e.target.files.length > 0) {
@@ -28,6 +30,7 @@ const BoardWrite = () => {
         axios.post(`${url}/boardWrite`, formData)
             .then(res=>{
                 console.log(res.data);
+                navigate("/");
             })
             .catch(err=>{
                 console.log(err)

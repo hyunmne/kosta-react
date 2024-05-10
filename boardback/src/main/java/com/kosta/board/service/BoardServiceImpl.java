@@ -30,42 +30,44 @@ public class BoardServiceImpl implements BoardService {
 
 	@Value("${upload.path}")
 	private String uploadPath;
-	
+
 	private final FileRepository fileRepository;
 	private final BoardRepository boardRepository;
 	private final BoardLikeRepository brdLikeRepository;
-	
+
 	@Override
 	public Integer boardWrite(String subject, String content, String writer, MultipartFile[] files) throws Exception {
 		String fileNums = "";
-		for(MultipartFile file : files){
-			if(file!=null && !file.isEmpty()) { 
-				BFile bFile = BFile.builder()
-						.name(file.getOriginalFilename())
-						.directory(uploadPath)
-						.size(file.getSize())
-						.contenttype(file.getContentType())
-						.build();
-				
-				fileRepository.save(bFile); // DB에 file 저장
-				
-				File upFile = new File(uploadPath, bFile.getNum()+"");
-				file.transferTo(upFile); // 폴더에 파일 업로드 
-				if(fileNums.equals("")) {
-					fileNums = bFile.getNum()+"";
-				} else {
-					fileNums += "," + bFile.getNum();
+		if(files!=null) {
+			for(MultipartFile file : files){
+				if(file!=null && !file.isEmpty()) { 
+					BFile bFile = BFile.builder()
+							.name(file.getOriginalFilename())
+							.directory(uploadPath)
+							.size(file.getSize())
+							.contenttype(file.getContentType())
+							.build();
+
+					fileRepository.save(bFile); // DB에 file 저장
+
+					File upFile = new File(uploadPath, bFile.getNum()+"");
+					file.transferTo(upFile); // 폴더에 파일 업로드 
+					if(fileNums.equals("")) {
+						fileNums = bFile.getNum()+"";
+					} else {
+						fileNums += "," + bFile.getNum();
+					}
 				}
 			}
 		}
-		
+
 		Board board = Board .builder()
-							.subject(subject)
-							.content(content)
-							.member(Member.builder().id(writer).build())
-							.fileNums(fileNums)
-							.build();
-		
+				.subject(subject)
+				.content(content)
+				.member(Member.builder().id(writer).build())
+				.fileNums(fileNums)
+				.build();
+
 		boardRepository.save(board); // board table에 글 삽입 
 		return board.getNum();
 	}
@@ -89,18 +91,18 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 		pageInfo.setAllPage(pages.getTotalPages()); // 전체 페이지의 수
-		
+
 		int startPage = (pageInfo.getCurPage()-1)/10*10+1;
 		int endPage = Math.min(startPage+10-1, pageInfo.getAllPage());
-		
+
 		pageInfo.setStartPage(startPage);
 		pageInfo.setEndPage(endPage);
-		
+
 		List<BoardDto> boardDtoList = new ArrayList<>();
 		for (Board brd : pages.getContent()) {
 			boardDtoList.add(brd.toBoardDto()); // 반복문으로 객체에 데이터 넣어주기..
 		}
-		
+
 		return boardDtoList;
 	}
 
@@ -114,55 +116,55 @@ public class BoardServiceImpl implements BoardService {
 		return board.toBoardDto();
 	}
 
-//	@Override
-//	   public void boardModify(BoardDto boardDto, MultipartFile file) throws Exception {
-//	      //파일 수정의 경우
-//	      //1. 기존파일이 있으면서 파일을 변경할 경우
-//	      //2. 기존파일이 없으면서 파일을 추가하는 경우
-//	      //3. 기존파일이 있는데 변경하지 않는 경우
-//	      
-//	      BoardDto beforeBoardDto = boardDetail(boardDto.getNum());
-//	      
-//	      if(file != null && !file.isEmpty()) {  //변경할 파일이 있는 경우
-//	         //새 파일 업로드 & 새 파일정보 삽입
-//	         BFile bFile = BFile.builder()
-//	                        .name(file.getOriginalFilename())
-//	                        .directory(uploadPath)
-//	                        .size(file.getSize())
-//	                        .contenttype(file.getContentType())
-//	                        .build();
-//	         fileRepository.save(bFile);
-//	         File upFile = new File(uploadPath, bFile.getNum()+"");
-//	         file.transferTo(upFile);
-//	         boardDto.setFileNum(bFile.getNum());
-//	      } else {  //파일을 변경하지 않는 경우 (기존 file정보)
-//	         boardDto.setFileNum(beforeBoardDto.getFileNum());
-//	      }
-//	      
-//	      boardRepository.save(boardDto.toBoard());
-//	      
-//	      //1의 경우에만 삭제
-//	      //파일을 수정하고 && 기존 업로드된 파일이 있을 경우 기존 업로드한 파일을 테이블에서 데이터 삭제하고 파일 삭제
-//	      if(file != null && !file.isEmpty() &&  //새로운 파일로 변경하는 조건 
-//	               beforeBoardDto.getFileNum() != null) {  //기존에 파일이 있는 조건
-//	         fileRepository.deleteById(beforeBoardDto.getFileNum());
-//	         File beforeFile = new File(uploadPath, beforeBoardDto.getFileNum()+"");
-//	         beforeFile.delete();
-//	      }
-//	   }
-//	
+	//	@Override
+	//	   public void boardModify(BoardDto boardDto, MultipartFile file) throws Exception {
+	//	      //파일 수정의 경우
+	//	      //1. 기존파일이 있으면서 파일을 변경할 경우
+	//	      //2. 기존파일이 없으면서 파일을 추가하는 경우
+	//	      //3. 기존파일이 있는데 변경하지 않는 경우
+	//	      
+	//	      BoardDto beforeBoardDto = boardDetail(boardDto.getNum());
+	//	      
+	//	      if(file != null && !file.isEmpty()) {  //변경할 파일이 있는 경우
+	//	         //새 파일 업로드 & 새 파일정보 삽입
+	//	         BFile bFile = BFile.builder()
+	//	                        .name(file.getOriginalFilename())
+	//	                        .directory(uploadPath)
+	//	                        .size(file.getSize())
+	//	                        .contenttype(file.getContentType())
+	//	                        .build();
+	//	         fileRepository.save(bFile);
+	//	         File upFile = new File(uploadPath, bFile.getNum()+"");
+	//	         file.transferTo(upFile);
+	//	         boardDto.setFileNum(bFile.getNum());
+	//	      } else {  //파일을 변경하지 않는 경우 (기존 file정보)
+	//	         boardDto.setFileNum(beforeBoardDto.getFileNum());
+	//	      }
+	//	      
+	//	      boardRepository.save(boardDto.toBoard());
+	//	      
+	//	      //1의 경우에만 삭제
+	//	      //파일을 수정하고 && 기존 업로드된 파일이 있을 경우 기존 업로드한 파일을 테이블에서 데이터 삭제하고 파일 삭제
+	//	      if(file != null && !file.isEmpty() &&  //새로운 파일로 변경하는 조건 
+	//	               beforeBoardDto.getFileNum() != null) {  //기존에 파일이 있는 조건
+	//	         fileRepository.deleteById(beforeBoardDto.getFileNum());
+	//	         File beforeFile = new File(uploadPath, beforeBoardDto.getFileNum()+"");
+	//	         beforeFile.delete();
+	//	      }
+	//	   }
+	//	
 	@Override
 	public Boolean checkBoardLike(String memberId, Integer boardNum) throws Exception {
 		Optional<BoardLike> obrdLike = brdLikeRepository.findByMember_IdAndBoard_Num(memberId, boardNum);
-		
+
 		if(obrdLike.isPresent()) { // 기존에 좋아요를 선택했을 경우 좋아요 삭제
 			brdLikeRepository.deleteById(obrdLike.get().getNum());
 			return false;
 		} else { // 기존에 좋아요를 선택하지 않았을 경우 좋아요 삽입
 			brdLikeRepository.save(BoardLike.builder()
-									.member(Member.builder().id(memberId).build())
-									.board(Board.builder().num(boardNum).build())
-									.build());
+					.member(Member.builder().id(memberId).build())
+					.board(Board.builder().num(boardNum).build())
+					.build());
 			return true;
 		}
 	}
