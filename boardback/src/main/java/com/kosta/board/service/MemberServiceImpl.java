@@ -50,4 +50,11 @@ public class MemberServiceImpl implements MemberService {
  		return false;
 	}
 
+	@Override
+	public MemberDto memberInfo(String id) throws Exception {
+		Optional<Member> omem = memres.findById(id);
+		if(omem.isEmpty()) throw new Exception("아이디 오류");
+		return modelmapper.map(omem.get(), MemberDto.class);
+	}
+
 }

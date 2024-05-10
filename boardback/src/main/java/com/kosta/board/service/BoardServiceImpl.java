@@ -111,7 +111,7 @@ public class BoardServiceImpl implements BoardService {
 		Optional<Board> obrd = boardRepository.findById(num);
 		if(obrd.isEmpty()) throw new Exception("글번호 오류");
 		Board board = obrd.get();
-		board.setViewCount(board.getViewCount());
+		board.setViewCount(board.getViewCount()+1);
 		boardRepository.save(board);
 		return board.toBoardDto();
 	}
