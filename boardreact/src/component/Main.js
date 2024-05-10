@@ -7,13 +7,13 @@ const Main = () => {
             <NavbarToggler className='mr-auto'/>
             <Nav navbar>
                 <NavItem>
-                    <NavLink href="/">로그인</NavLink>
+                    <NavLink href="/login">로그인</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink href="/join">회원가입</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/list">게시판</NavLink>
+                    <NavLink href="/">게시판</NavLink>
                 </NavItem>
             </Nav>
         </Navbar>
