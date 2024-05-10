@@ -22,7 +22,7 @@ public class BoardDto {
 	private Integer num;
 	private String subject;
 	private String content;
-	private Integer fileNum;
+	private String fileNums;
 	private Integer viewCount;
 	private Integer likeCount;
 	private Date writeDate;
@@ -38,7 +38,7 @@ public class BoardDto {
 				.num(num)
 				.subject(subject)
 				.content(content)
-				.fileNum(fileNum)
+				.fileNums(fileNums)
 				.viewCount(viewCount)
 				.likeCount(likeCount)
 				.writeDate(writeDate)

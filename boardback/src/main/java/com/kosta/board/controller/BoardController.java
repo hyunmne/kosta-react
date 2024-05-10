@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.board.dto.BoardDto;
 import com.kosta.board.service.BoardService;
@@ -46,6 +48,19 @@ public class BoardController {
 			Integer boardNum = brdService.deleteBoard(num);
 			return new ResponseEntity<Integer>(boardNum, HttpStatus.OK);
 		} catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PostMapping("/boardWrite")
+	public ResponseEntity<Integer> boardWrite(@RequestParam("subject") String subject,
+			@RequestParam("content") String content, @RequestParam("writer") String writer,
+			@RequestParam("file") MultipartFile[] files){
+		try {
+			Integer boardNum = brdService.boardWrite(subject, content, writer, files);
+			return new ResponseEntity<Integer>(boardNum, HttpStatus.OK);
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		}
