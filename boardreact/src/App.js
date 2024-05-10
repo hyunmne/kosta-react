@@ -7,6 +7,7 @@ import BoardList from './component/BoardList';
 import BoardWrite from './component/BoardWrite';
 import BoardDetail from './component/BoardDetail';
 
+// : 가 붙으면 path가 아니라 파라미터를 뜻한다
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route exect path="/" element={<BoardList/>} />
         <Route exect path="/boardWrite" element={<BoardWrite/>} />
-        <Route exect path="/boardDetail" element={<BoardDetail />} />
+        <Route exect path="/boardDetail/:num" element={<BoardDetail />} />
       </Routes>
     </div>
   );
