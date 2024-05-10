@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Input, Button, Label, Col, Form, FormGroup } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {url} from '../config';
 
 const BoardWrite = () => {
@@ -14,6 +14,11 @@ const BoardWrite = () => {
             setFileList([...fileList, e.target.files[0]]);
         }
     };
+
+    useEffect(()=> {
+        let loginUser = JSON.parse(sessionStorage.getItem("user"));
+        loginUser && setBoard({...board, writer:loginUser.id});
+    }, [])
 
     const changeValue = (e) => {
         setBoard({ ...board, [e.target.name]: e.target.value })
@@ -44,7 +49,7 @@ const BoardWrite = () => {
                 <FormGroup row>
                     <Label sm={4}>글쓴이</Label>
                     <Col sm={8}>
-                        <Input type="text" id="writer" name="writer" required onChange={changeValue} />
+                        <Input type="text" id="writer" name="writer" value={board.writer} disabled onChange={changeValue} />
                     </Col>
                 </FormGroup>
                 <FormGroup row>
