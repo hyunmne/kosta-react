@@ -51,7 +51,11 @@ public class BoardServiceImpl implements BoardService {
 				
 				File upFile = new File(uploadPath, bFile.getNum()+"");
 				file.transferTo(upFile); // 폴더에 파일 업로드 
-				fileNums += bFile.getNum()+",";
+				if(fileNums.equals("")) {
+					fileNums = bFile.getNum()+"";
+				} else {
+					fileNums += "," + bFile.getNum();
+				}
 			}
 		}
 		
