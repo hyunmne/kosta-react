@@ -1,18 +1,20 @@
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useSelector,useDispatch } from 'react-redux';
+import { initState } from '../reducer';
 
 const Main = () => {
-    const [user, setUser] = useState(null);
+    const user = useSelector(state=>state.persistedReducer.user);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        let loginUser = JSON.parse(sessionStorage.getItem("user"));
-        // console.log(loginUser);
-        loginUser && setUser({ ...loginUser });
-    }, [])
+    // useEffect(() => {
+    //     let loginUser = JSON.parse(sessionStorage.getItem("user"));
+    //     // console.log(loginUser);
+    //     loginUser && setUser({ ...loginUser });
+    // }, [])
 
     const logout = () => {
-        sessionStorage.removeItem("user");
-        setUser(null);
+        dispatch({type:'user',payload:initState.user})
     }
 
     return (
@@ -20,7 +22,7 @@ const Main = () => {
             <NavbarBrand href="/" className='mr-auto'><i><b>kosta.com</b></i></NavbarBrand>
             <NavbarToggler className='mr-auto' />
             <Nav navbar>
-                {user !== null ?
+                {user.id!=='' ?
                     (<>
                         <NavItem>
                             <NavLink href="/#"><b>{user.name}</b></NavLink>

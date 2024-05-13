@@ -1,6 +1,7 @@
 import { Table, Input, Button, Label } from 'reactstrap';
 import { useState, useEffect } from 'react';
 import { url } from '../config';
+import { useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,15 +10,15 @@ const BoardDetail = () => {
     const [board, setBoard] = useState({ num: '', subject: '', content: '', writer: '', likeCount:'' })
     const [imageList, setImageList] = useState([]);
     const [heart, setHeart] = useState(false);
-    const [user, setUser] = useState(null);
+    const user = useSelector(state=>state.persistedReducer.user);
     const {num} = useParams(); // 이름 같아야 함.. 
 
     useEffect(()=>{
-        let loginUser = JSON.parse(sessionStorage.getItem("user"));
+        // let loginUser = JSON.parse(sessionStorage.getItem("user"));
         let detailUrl = `${url}/boardDetail/${num}`;
-        if(loginUser!=null){
-            detailUrl += `/${loginUser.id}`
-            setUser({...loginUser});
+        if(user.id!==''){
+            detailUrl += `/${user.id}`
+            // setUser({...loginUser});
         }
 
         axios.get(detailUrl)
@@ -67,9 +68,11 @@ const BoardDetail = () => {
                         <tr>
                             <td></td>
                             <td>
-                                <Button color='primary'>수정</Button>&nbsp;&nbsp;
+                                {user.id===board.writer && 
+                                    <Button color='primary'>수정</Button>
+                                }&nbsp;&nbsp;
                                 <Button color='secondary' tag='a' href="/">목록</Button>&nbsp;&nbsp;
-                                {user && <img src={heart===true? '/redheart.png':'/blackheart.png'} alt='' width='30px' />} &nbsp;&nbsp;
+                                {user.id!=='' && <img src={heart===true? '/redheart.png':'/blackheart.png'} alt='' width='30px' />} &nbsp;&nbsp;
                                 <span>{board.likeCount}</span>
                             </td>
                         </tr>
