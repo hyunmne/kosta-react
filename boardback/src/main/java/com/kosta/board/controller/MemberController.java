@@ -32,6 +32,7 @@ public class MemberController {
 	public ResponseEntity<MemberDto> login(@RequestBody Map<String, String> param ){
 		try {
 			MemberDto memDto = memservice.login(param.get("id"), param.get("password"));
+			memDto.setPassword("");
 			return new ResponseEntity<MemberDto>(memDto, HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
