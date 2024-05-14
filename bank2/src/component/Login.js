@@ -1,13 +1,16 @@
 import { useState } from 'react';
-// import './App.css';
+import { useAtom } from 'jotai/react';
+import { userAtom } from '../atoms';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Col, Button, Form, Table, Label, Input } from 'reactstrap';
+import { Button, Table, Label, Input } from 'reactstrap';
 
 export default function Login() {
     const divStyle = { margin: '0 auto', width: '400px', border: '1px solid lightgray', boarderRadius: '7px', padding: '20px' }
     const navigate = useNavigate();
+    const [user, setUser] = useAtom(userAtom); // 조회 데이터, 변경 데이터
     const [mem, setMem] = useState({ id: '', password: '' })
+
     const changeValue = (e) => {
         setMem({ ...mem, [e.target.name]: e.target.value });
     }
@@ -16,7 +19,8 @@ export default function Login() {
         e.preventDefault();
         axios.post(`http://localhost:8090/login`, mem)
             .then(res => {
-                navigate("/");
+                setUser(res.data);
+                navigate("/makeAccount");
             })
             .catch(err => {
                 alert(err.repsonse.data);

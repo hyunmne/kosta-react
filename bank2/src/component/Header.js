@@ -1,18 +1,24 @@
 // import {Link} from 'react-router-dom';
 import {useState} from 'react';
+import { useAtom } from 'jotai/react';
+import { useNavigate } from 'react-router-dom';
+import { userAtom, initUser } from '../atoms';
 import {Navbar, NavbarToggler, NavbarBrand, Nav,
         NavItem, NavLink, UncontrolledDropdown, 
         DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false); 
-    
-    const toggle = () => {
+    const [user, setUser] = useAtom(userAtom);
+    const navigate = useNavigate();
+
+    function toggle() {
         setIsOpen(!isOpen);
     }
 
     const logout = () => {
-    
+        setUser(initUser)
+        navigate("/")
     }
 
 
@@ -32,7 +38,7 @@ const Header = () => {
                 </>
                 ) :
                 (<NavItem>
-                    <NavLink href="/login">로그인</NavLink>
+                    <NavLink href="/">로그인</NavLink>
                 </NavItem>)
                 }
                 <NavItem>
@@ -41,7 +47,7 @@ const Header = () => {
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle tag="a" className="nav-link" caret>계좌</DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem tag="a" href="/">계좌개설</DropdownItem>
+                        <DropdownItem tag="a" href="/makeAccount">계좌개설</DropdownItem>
                         <DropdownItem tag="a" href="/deposit">입금</DropdownItem>
                         <DropdownItem tag="a" href="/withdraw">출금</DropdownItem>
                         <DropdownItem tag="a" href="/accountInfo">계좌조회</DropdownItem>

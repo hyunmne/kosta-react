@@ -9,23 +9,25 @@ import Withdraw from './component/Withdraw';
 import AllAccountInfo from './component/AllAccountInfo';
 import Join from './component/Join';
 import Login from './component/Login';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 
 function App() {
   return (
     <div>
-      <Header/>
-      <Routes>
-        <Route exact path="/" element={<MakeAccount/>} />
-        <Route exact path="/accountInfo" element={<AccountInfo />} />
-        <Route exact path="/deposit" element={<Deposit />} />
-        <Route exact path="/withdraw" element={<Withdraw />} />
-        <Route exact path="/allAccountInfo" element={<AllAccountInfo/>} />
-        <Route exact path="/join" element={<Join/>}/>
-        <Route exact path="/login" element={<Login />} />
-      </Routes>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route exact path="/makeAccount" element={<MakeAccount />} />
+          <Route exact path="/accountInfo" element={<AccountInfo />} />
+          <Route exact path="/deposit" element={<Deposit />} />
+          <Route exact path="/withdraw" element={<Withdraw />} />
+          <Route exact path="/allAccountInfo" element={<AllAccountInfo />} />
+          <Route exact path="/join" element={<Join />} />
+          <Route exact path="/" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
