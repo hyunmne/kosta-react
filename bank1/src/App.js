@@ -2,13 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Header from './Header';
-import { MakeAccount } from './MakeAccount';
-import AccountInfo from './AccountInfo';
-import Deposit from './Deposit';
-import Withdraw from './Withdraw';
-import AllAccountInfo from './AllAccountInfo';
-import Join from './Join';
-import Login from './Login';
+import { MakeAccount } from './component/MakeAccount';
+import AccountInfo from './component/AccountInfo';
+import Deposit from './component/Deposit';
+import Withdraw from './component/Withdraw';
+import AllAccountInfo from './component/AllAccountInfo';
+import Join from './component/Join';
+import Login from './component/Login';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'; 
 
 
