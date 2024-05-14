@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import {Navbar, NavbarToggler, NavbarBrand, Nav,
         NavItem, NavLink, UncontrolledDropdown, 
@@ -10,15 +10,6 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false); 
     const user = useSelector(state=>state.persistedReducer.user);
     const dispatch = useDispatch();
-
-    const divStyle = {
-        backgroundColor : '#ebe3b7',
-        width:'100%',
-        position:'fixed',
-        left:'0px',
-        top:'0px',
-        zIndex:10
-    };
 
     const toggle = () => {
         setIsOpen(!isOpen);
