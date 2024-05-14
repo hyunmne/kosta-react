@@ -3,9 +3,14 @@ import {useState} from 'react';
 import {Navbar, NavbarToggler, NavbarBrand, Nav,
         NavItem, NavLink, UncontrolledDropdown, 
         DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { initState } from '../reducer';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false); 
+    const user = useSelector(state=>state.persistedReducer.user);
+    const dispatch = useDispatch();
+
     const divStyle = {
         backgroundColor : '#ebe3b7',
         width:'100%',
@@ -14,8 +19,13 @@ const Header = () => {
         top:'0px',
         zIndex:10
     };
+
     const toggle = () => {
         setIsOpen(!isOpen);
+    }
+
+    const logout = () => {
+        dispatch({type:'user', payload:initState.user})
     }
 
     return (
@@ -23,9 +33,20 @@ const Header = () => {
             <NavbarBrand><i><b>코스타 은행</b></i></NavbarBrand>
             <NavbarToggler onClick={toggle}/>
             <Nav className="ml-auto" navbar>
-                <NavItem>
+                {user.id!=='' ?
+                (<>
+                    <NavItem>
+                        <NavLink href="#"><b>{user.name}</b></NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink onClick={logout}>로그아웃</NavLink>
+                    </NavItem>
+                </>
+                ) :
+                (<NavItem>
                     <NavLink href="/login">로그인</NavLink>
-                </NavItem>
+                </NavItem>)
+                }
                 <NavItem>
                     <NavLink href="/join">회원가입</NavLink>
                 </NavItem>

@@ -48,3 +48,9 @@ a {
 .label-text {
   text-align: center;
 }
+
+.header-text{
+  margin:20px auto;
+  text-align:center;
+  font-size:25px;
+}

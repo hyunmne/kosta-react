@@ -107,3 +107,5 @@ export const Join = () => {
         </div>
     )
 }
+
+export default Join;
