@@ -44,13 +44,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody Map<String, String> param) {
+	public ResponseEntity<MemberDto> login(@RequestBody Map<String, String> param) {
 		try {
-			memservice.login(param.get("id"), param.get("password"));
-			return new ResponseEntity<String>(HttpStatus.OK);
+			MemberDto memDto = memservice.login(param.get("id"), param.get("password"));
+			return new ResponseEntity<MemberDto>(memDto, HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<MemberDto>(HttpStatus.BAD_REQUEST);
 		}
 	}
 }

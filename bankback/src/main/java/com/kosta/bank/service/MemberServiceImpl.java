@@ -28,11 +28,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void login(String id, String password) throws Exception {
+	public MemberDto login(String id, String password) throws Exception {
 		Optional<Member> omem = memres.findById(id);
 		if (omem.isEmpty()) throw new Exception("아이디 오류");
 		Member mem = omem.get();
 		if(!mem.getPassword().equals(password.trim())) throw new Exception("비밀번호 오류");
+		return modelmapper.map(mem,MemberDto.class);
 		
 	}
 
