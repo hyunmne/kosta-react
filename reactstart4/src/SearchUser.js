@@ -4,7 +4,8 @@ import {userAtom} from './atoms';
 import {useAtom, useSetAtom} from 'jotai';
 import {useNavigate} from 'react-router-dom';
 
-const SearchUser = () => {
+const 
+SearchUser = () => {
     // const [user, setUser] = useAtom(userAtom); // 초기 값과 변경 값을 같이 가져옴 
     // const user = useAtomValue(userAtom); 초기 값만 가져옴
     const setUser = useSetAtom(userAtom); // 변경되는 값만 가져옴
