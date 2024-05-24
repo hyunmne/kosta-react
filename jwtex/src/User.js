@@ -9,18 +9,15 @@ const User = () =>  {
     const [member, setMember] = useState({id:'', password:'', email:'', address:''})
     const token = useAtomValue(tokenAtom);
 
-    const changeValue = (e) => {
-        setMember({...member, [e.target.name]:e.target.value})
-    }
-
     useEffect(() =>{
         axios.get(`http://localhost:8090/user`,
             {
-                headers:{Authorization:token.access_token}
+                headers:{Authorization:JSON.stringify(token)}
             }
         )
             .then(res=>{
                 console.log(res);
+                console.log(res.headers.Authorization);
                 setMember({...res.data});
             })
             .catch(err=>{
