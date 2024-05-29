@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Input, Button, Label, Col, Form, FormGroup } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import {url} from '../config';
 
 const BoardWrite = () => {
-    const [board, setBoard] = useState({ subject: '', content: '', writer: '' });
+    const user = useSelector(state=>state.persistedReducer.user);
+    const [board, setBoard] = useState({ subject: '', content: '', writer: user.id });
     const [fileList, setFileList] = useState([]);
     const navigate = useNavigate();
 
